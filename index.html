@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotogram</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <a class="brand-link" href="./index.html" aria-label="Fotogram Startseite">
+        <img class="brand-icon" src="./assets/icons/fotogram-icon.png" alt="">
+        <img class="brand-wordmark" src="./assets/icons/fotogram-wordmark.png" alt="Fotogram">
+      </a>
+    </header>
+
+    <main>
+      <section class="gallery-section" aria-labelledby="gallery-title">
+        <h1 id="gallery-title">Your personal photo album</h1>
+        <div id="gallery" class="gallery" aria-label="Fotogalerie"></div>
+      </section>
+    </main>
+
+    <div id="photo-dialog" class="photo-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+      <article class="dialog-card">
+        <header class="dialog-header">
+          <h2 id="dialog-title" class="dialog-title"></h2>
+          <button id="close-dialog" class="dialog-button close-button" type="button" aria-label="Grossansicht schliessen"></button>
+        </header>
+        <figure class="dialog-figure">
+          <img id="dialog-image" class="dialog-image" src="" alt="">
+        </figure>
+        <nav class="dialog-navigation" aria-label="Bildnavigation">
+          <button id="previous-photo" class="dialog-button arrow-button arrow-button-left" type="button" aria-label="Vorheriges Foto"></button>
+          <p id="dialog-counter" class="dialog-counter"></p>
+          <button id="next-photo" class="dialog-button arrow-button arrow-button-right" type="button" aria-label="Naechstes Foto"></button>
+        </nav>
+      </article>
+    </div>
+
+    <footer class="page-footer">
+      <a class="academy-link" href="https://developerakademie.com/" target="_blank" rel="noopener noreferrer" aria-label="Developer Akademie Website oeffnen">
+        <img class="academy-logo" src="./assets/icons/developer-akademie-logo.png" alt="Developer Akademie">
+      </a>
+      <p>&copy; 2026 Developer Akademie GmbH</p>
+    </footer>
+  </body>
+</html>
