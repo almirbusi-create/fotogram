@@ -1,5 +1,3 @@
-"use strict";
-
 const galleryElement = document.getElementById("gallery");
 const dialogElement = document.getElementById("photo-dialog");
 const dialogTitleElement = document.getElementById("dialog-title");
@@ -10,6 +8,7 @@ const previousPhotoButton = document.getElementById("previous-photo");
 const nextPhotoButton = document.getElementById("next-photo");
 
 let currentPhotoIndex = 0;
+let lastFocusedElement = null;
 
 const photos = [
   {
@@ -123,6 +122,7 @@ function handlePhotoButtonClick(event) {
 
 function openDialog(index) {
   currentPhotoIndex = index;
+  lastFocusedElement = document.activeElement;
   updateDialogPhoto();
   dialogElement.hidden = false;
   document.body.classList.add("dialog-open");
@@ -132,6 +132,10 @@ function openDialog(index) {
 function closeDialog() {
   dialogElement.hidden = true;
   document.body.classList.remove("dialog-open");
+
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+  }
 }
 
 function showPreviousPhoto() {
@@ -176,15 +180,38 @@ function handleKeydown(event) {
 
   if (event.key === "Escape") {
     closeDialog();
+    return;
   }
 
   if (event.key === "ArrowLeft") {
     showPreviousPhoto();
+    return;
   }
 
   if (event.key === "ArrowRight") {
     showNextPhoto();
+    return;
+  }
+
+  if (event.key === "Tab") {
+    keepFocusInDialog(event);
   }
 }
 
-init();
+function keepFocusInDialog(event) {
+  const focusableElements = dialogElement.querySelectorAll("button");
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  }
+
+  if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
