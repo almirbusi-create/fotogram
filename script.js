@@ -9,6 +9,7 @@ const nextPhotoButton = document.getElementById("next-photo");
 
 let currentPhotoIndex = 0;
 let lastFocusedElement = null;
+let pageScrollPosition = 0;
 
 const photoList = [
   {
@@ -125,17 +126,31 @@ function openDialog(index) {
   lastFocusedElement = document.activeElement;
   updateDialogPhoto();
   dialogElement.hidden = false;
+  lockPageScroll();
   document.body.classList.add("dialog-open");
+  document.documentElement.classList.add("dialog-open");
   closeDialogButton.focus();
 }
 
 function closeDialog() {
   dialogElement.hidden = true;
   document.body.classList.remove("dialog-open");
+  document.documentElement.classList.remove("dialog-open");
+  unlockPageScroll();
 
   if (lastFocusedElement) {
     lastFocusedElement.focus();
   }
+}
+
+function lockPageScroll() {
+  pageScrollPosition = window.scrollY;
+  document.body.style.top = `-${pageScrollPosition}px`;
+}
+
+function unlockPageScroll() {
+  document.body.style.top = "";
+  window.scrollTo(0, pageScrollPosition);
 }
 
 function showPreviousPhoto() {
