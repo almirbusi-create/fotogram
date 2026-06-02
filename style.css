@@ -28,8 +28,14 @@ body {
   font-family: var(--font-primary);
 }
 
+html.dialog-open,
 body.dialog-open {
   overflow: hidden;
+}
+
+body.dialog-open {
+  position: fixed;
+  width: 100%;
 }
 
 main {
@@ -403,11 +409,12 @@ h1 {
   }
 
   .dialog-card {
-    width: 343px;
-    height: 664px;
-    max-width: calc(100vw - 32px);
+    width: min(343px, calc(100vw - 32px));
+    height: min(664px, calc(100vh - 32px));
+    max-width: 100%;
     max-height: calc(100vh - 32px);
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 24px 21px 28px;
     border-radius: 28px;
   }
@@ -415,27 +422,31 @@ h1 {
   .dialog-header {
     position: relative;
     align-items: flex-start;
-    width: 281px;
+    width: 100%;
+    max-width: 281px;
     height: 69px;
     margin: 0 auto 16px;
   }
 
   .dialog-title {
-    width: 281px;
+    width: 100%;
     height: 29px;
+    padding-right: 40px;
     font-size: 16px;
     line-height: 29px;
   }
 
   .dialog-image {
-    width: 300px;
-    height: 375px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 300 / 375;
     object-fit: cover;
   }
 
   .dialog-navigation {
-    width: 261px;
+    width: 100%;
+    max-width: 261px;
     height: 60px;
     margin-top: 32px;
   }
