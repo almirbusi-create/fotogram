@@ -300,6 +300,29 @@ h1 {
   transform: translateY(-18px);
 }
 
+@media (max-width: 1292px) {
+  .page-header {
+    padding: 0 24px;
+  }
+
+  .brand-link {
+    transform: none;
+  }
+
+  .gallery-section {
+    width: min(100% - 48px, var(--content-width));
+    padding: 120px 0 140px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 4.3vw, 56px);
+  }
+
+  .gallery {
+    gap: 32px 16px;
+  }
+}
+
 @media (max-width: 700px) {
   :root {
     --header-height: 72px;
