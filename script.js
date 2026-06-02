@@ -10,7 +10,7 @@ const nextPhotoButton = document.getElementById("next-photo");
 let currentPhotoIndex = 0;
 let lastFocusedElement = null;
 
-const photos = [
+const photoList = [
   {
     title: "Alaska-810433_1280",
     src: "./assets/img/glacier.png",
@@ -97,8 +97,8 @@ function init() {
 function renderGallery() {
   galleryElement.innerHTML = "";
 
-  for (let index = 0; index < photos.length; index++) {
-    galleryElement.innerHTML += renderPhoto(photos[index], index);
+  for (let index = 0; index < photoList.length; index++) {
+    galleryElement.innerHTML += renderPhotoButton(photoList[index], index);
   }
 
   const photoButtons = galleryElement.querySelectorAll(".photo-button");
@@ -108,7 +108,7 @@ function renderGallery() {
   }
 }
 
-function renderPhoto(photo, index) {
+function renderPhotoButton(photo, index) {
   return `
     <button class="photo-button" type="button" data-photo-index="${index}" aria-label="Foto ${index + 1} gross ansehen">
       <img class="photo-thumbnail" src="${photo.src}" alt="${photo.alt}">
@@ -142,7 +142,7 @@ function showPreviousPhoto() {
   currentPhotoIndex--;
 
   if (currentPhotoIndex < 0) {
-    currentPhotoIndex = photos.length - 1;
+    currentPhotoIndex = photoList.length - 1;
   }
 
   updateDialogPhoto();
@@ -151,7 +151,7 @@ function showPreviousPhoto() {
 function showNextPhoto() {
   currentPhotoIndex++;
 
-  if (currentPhotoIndex >= photos.length) {
+  if (currentPhotoIndex >= photoList.length) {
     currentPhotoIndex = 0;
   }
 
@@ -159,12 +159,12 @@ function showNextPhoto() {
 }
 
 function updateDialogPhoto() {
-  const currentPhoto = photos[currentPhotoIndex];
+  const currentPhoto = photoList[currentPhotoIndex];
 
   dialogTitleElement.textContent = currentPhoto.title;
   dialogImageElement.src = currentPhoto.fullSrc;
   dialogImageElement.alt = currentPhoto.alt;
-  dialogCounterElement.textContent = `${currentPhotoIndex + 1}/${photos.length}`;
+  dialogCounterElement.textContent = `${currentPhotoIndex + 1}/${photoList.length}`;
 }
 
 function closeDialogOnBackdropClick(event) {
